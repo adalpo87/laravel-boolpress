@@ -26,7 +26,8 @@ class PostRequest extends FormRequest
         return [
             /* regole */
             'title'=>'required|max:255',
-            'content'=>'required|min:3'
+            'content'=>'required|min:3',
+            'category_id' => 'nullable|exists:categories,id'
         ];
     }
 
@@ -36,7 +37,8 @@ class PostRequest extends FormRequest
             'title.required'=>'Il campo è vuoto, devi scrivere qualcosa',
             'title.max'=>'Il testo deve avere un massimo di :max caratteri',
             'content.required'=>'Il contenuto è vuoto, devi scrivere qualcosa',
-            'content.min'=>'Il testo deve avere almeno :min caratteri'
+            'content.min'=>'Il testo deve avere almeno :min caratteri',
+            'category_id.exists' => 'Non è presente la categoria scelta'
         ];
     }
 }
