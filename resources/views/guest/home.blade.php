@@ -6,7 +6,8 @@
 
         <title>BoolPress</title>
     </head>
-    <body>
-        <h1>BoolPress</h1>
+    <body class="container">
+       <div id="app"></div>
+        <script src="{{ asset('js/app.js') }}" defer></script>
     </body>
 </html>
