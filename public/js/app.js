@@ -20438,8 +20438,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   }, {
     path: '/*',
     name: 'error404',
-    component: _pages_Error404_vue__WEBPACK_IMPORTED_MODULE_6__["default"] //non necessario
-
+    component: _pages_Error404_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
   }, {
     path: '/detail/:slug',
     name: 'detail',
