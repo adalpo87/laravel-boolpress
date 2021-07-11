@@ -14,12 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+/* Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-});
+}); */
 
 Route::namespace('Api') //n.b. namespace mi indica dove la route deve puntare
     ->name('api.') //se mettiamo name poi qui sotto in route::get e name posso evitare di scrivere api.posts
     ->group(function(){
         Route::get('posts', 'PostController@index')->name('posts');
+        Route::get('posts/{slug}','PostController@show')->name('show');
     });

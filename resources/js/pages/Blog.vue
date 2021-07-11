@@ -5,27 +5,21 @@
         <div 
         v-if="!loaded"
          class="text-center mt-5">
-            <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            <Loader />
         </div>
      <div
      v-if="loaded"
      >
-         <div
-      v-for="post in posts"
+     <Card 
+     v-for="post in posts"
       :key="'p'+ post.id"
-      >
-          <div class="card mb-3">
-             <div class="card-body">
-                 <div class="d-flex justify-content-between"> 
-                     <h5 class="card-title">{{ post.title }}</h5>
-                     <span class="badge badge-dark custom-badge">{{post.category}}</span>
-                 </div>
-                 <i>{{ formatDate(post.date) }}</i>
-                 <p class="card-text">{{ post.content }}</p>
-                 <a href="#" class="btn btn-primary">Go somewhere</a>
-             </div>
-         </div>
-     </div>
+      :title="post.title"
+      :category="post.category"
+      :date="formatDate(post.date)"
+      :content="post.content"
+      :slug="post.slug"
+     />
+      
      </div>
 
     <!-- PAGINAZIONE -->
@@ -72,9 +66,15 @@
 <script>
 
 import axios from 'axios';
+import Loader from '../components/Loader.vue';
+import Card from '../components/Card.vue'
 
 export default {
     name: 'Blog',
+    components:{
+        Loader,
+        Card
+    },
     data(){
         return{
             posts: [],
@@ -84,7 +84,7 @@ export default {
         }
     },
     methods:{
-        getPosts(page = 1){
+        getPosts(page = 1){ //di base mi carica la pagina 1, poi sotto con params gli posso definire la pagina
             this.loaded= false;
            axios.get('http://127.0.0.1:8000/api/posts', {
                params:{
@@ -105,10 +105,10 @@ export default {
                 })
         },
         formatDate(date){
-            let d = new Date(date);
-            let dy = d.getDate();
-            let m = d.getMonth() + 1; //ha la logica dell array per questo gli diamo un +1
-            let y = d.getFullYear();
+            let d = new Date(date); //ottengo la data dei post dal api
+            let dy = d.getDate(); //gli passo la data e mi restituisce i giorni
+            let m = d.getMonth() + 1; //gli passo la data e mi restituisce i mesi da 0 a 11, per questo gli mettiamo +1
+            let y = d.getFullYear(); //gli passo la data e mi restituisce l anno per intero
             if (dy < 10) dy = '0'+dy;
             if (m < 10) m = '0'+m;
             return `${dy}/${m}/${y}`;
@@ -126,92 +126,6 @@ export default {
     height: 2rem;
     line-height: 2rem;
 }
-
-.lds-roller {
-  display: inline-block;
-  position: relative;
-  width: 80px;
-  height: 80px;
-}
-.lds-roller div {
-  animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  transform-origin: 40px 40px;
-}
-.lds-roller div:after {
-  content: " ";
-  display: block;
-  position: absolute;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: lightcoral;
-  margin: -4px 0 0 -4px;
-}
-.lds-roller div:nth-child(1) {
-  animation-delay: -0.036s;
-}
-.lds-roller div:nth-child(1):after {
-  top: 63px;
-  left: 63px;
-}
-.lds-roller div:nth-child(2) {
-  animation-delay: -0.072s;
-}
-.lds-roller div:nth-child(2):after {
-  top: 68px;
-  left: 56px;
-}
-.lds-roller div:nth-child(3) {
-  animation-delay: -0.108s;
-}
-.lds-roller div:nth-child(3):after {
-  top: 71px;
-  left: 48px;
-}
-.lds-roller div:nth-child(4) {
-  animation-delay: -0.144s;
-}
-.lds-roller div:nth-child(4):after {
-  top: 72px;
-  left: 40px;
-}
-.lds-roller div:nth-child(5) {
-  animation-delay: -0.18s;
-}
-.lds-roller div:nth-child(5):after {
-  top: 71px;
-  left: 32px;
-}
-.lds-roller div:nth-child(6) {
-  animation-delay: -0.216s;
-}
-.lds-roller div:nth-child(6):after {
-  top: 68px;
-  left: 24px;
-}
-.lds-roller div:nth-child(7) {
-  animation-delay: -0.252s;
-}
-.lds-roller div:nth-child(7):after {
-  top: 63px;
-  left: 17px;
-}
-.lds-roller div:nth-child(8) {
-  animation-delay: -0.288s;
-}
-.lds-roller div:nth-child(8):after {
-  top: 56px;
-  left: 12px;
-}
-@keyframes lds-roller {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
 
 
 </style>

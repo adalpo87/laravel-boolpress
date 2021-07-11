@@ -23,6 +23,7 @@ class PostController extends Controller
             'posts.id',
             'posts.title',
             'posts.content',
+            'posts.slug',
             'posts.created_at as date', // --> gli possiamo dare un nome tramite as
             'categories.name as category'
         )
@@ -31,69 +32,19 @@ class PostController extends Controller
         return response()->json($posts);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    
+   
+    public function show($slug) {
+        $post = Post::where('slug', $slug)->with(['category', 'tags'])->first();
+        if($post) {
+            return response()->json([
+                'success' => true,
+                'result' => $post
+            ]);
+        }
+        return response()->json([
+            'success' => false,
+            'error' => 'Nessun post trovato'
+        ]);
     }
 }

@@ -8,6 +8,7 @@ import About from './pages/About.vue';
 import Blog from './pages/Blog.vue';
 import Contact from './pages/Contact.vue';
 import Error404 from './pages/Error404.vue';
+import PostDetail from './pages/PostDetail.vue';
 
 const router = new VueRouter({
     mode: 'history', //->così tiene in memoria le pagine senza dover ricaricare tutto ogni volta, rende più veloce il sito
@@ -37,7 +38,12 @@ const router = new VueRouter({
         {
             path: '/*',
             name: 'error404',
-            component: Error404 //non necessario
+            component: Error404
+        },
+        {
+            path: '/detail/:slug',
+            name: 'detail',
+            component: PostDetail
         }
     ]
 });
