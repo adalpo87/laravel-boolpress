@@ -2330,7 +2330,6 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    //route è un oggetto passato dal router e contiene i parametri passati nel router-link
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://127.0.0.1:8000/api/posts/' + this.$route.params.slug).then(function (res) {
       _this.post = res.data.result;
 
@@ -20436,13 +20435,13 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     name: 'contacts',
     component: _pages_Contact_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
   }, {
-    path: '/*',
-    name: 'error404',
-    component: _pages_Error404_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
-  }, {
     path: '/detail/:slug',
     name: 'detail',
     component: _pages_PostDetail_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
+  }, {
+    path: '/*',
+    name: 'error404',
+    component: _pages_Error404_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
   }]
 });
 /* harmony default export */ __webpack_exports__["default"] = (router);

@@ -36,14 +36,14 @@ const router = new VueRouter({
             component: Contact
         },
         {
-            path: '/*',
-            name: 'error404',
-            component: Error404
-        },
-        {
             path: '/detail/:slug',
             name: 'detail',
             component: PostDetail
+        },
+        {
+            path: '/*',
+            name: 'error404',
+            component: Error404
         }
     ]
 });

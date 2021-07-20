@@ -42,7 +42,6 @@ export default {
         }
     },
     mounted(){
-        //route è un oggetto passato dal router e contiene i parametri passati nel router-link
         axios.get('http://127.0.0.1:8000/api/posts/'+this.$route.params.slug)
                 .then(res => {
                     this.post = res.data.result;

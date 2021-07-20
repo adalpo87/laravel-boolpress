@@ -24,7 +24,7 @@ class PostController extends Controller
             'posts.title',
             'posts.content',
             'posts.slug',
-            'posts.created_at as date', // --> gli possiamo dare un nome tramite as
+            'posts.created_at as date', 
             'categories.name as category'
         )
         ->join('categories','posts.category_id','categories.id')

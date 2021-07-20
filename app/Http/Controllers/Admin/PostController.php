@@ -44,6 +44,7 @@ class PostController extends Controller
     public function store(PostRequest $request)
     {
         $data= $request->all();
+        dd($data);
         $data['slug'] = Str::slug($data['title'], '-');
         $slug_exist = Post::where('slug', $data['slug'])->first();
         $counter = 0;
